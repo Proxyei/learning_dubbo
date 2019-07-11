@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:dubbo="http://dubbo.apache.org/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans   
+	   http://www.springframework.org/schema/beans/spring-beans-4.3.xsd 
+	   http://dubbo.apache.org/schema/dubbo 
+	   http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
+
+
+	<!-- 指定服务名字 -->
+	<dubbo:application name="helloworld-provider"></dubbo:application>
+	<!-- 把服务注册到zookeeper中 -->
+	<dubbo:registry address="zookeeper://127.0.0.1:2181"></dubbo:registry>
+	<!-- 指定dubbo通信协议 -->
+	<dubbo:protocol name="dubbo" port="20002"></dubbo:protocol>
+	<!-- 声明向外提供的服务接口 -->
+	<dubbo:service interface="com.xywei.dubbo.helloworld.service.HelloworldService" ref="helloServiceImpl"></dubbo:service>
+	<!-- 向spring中注册bean -->
+	<bean id="helloServiceImpl" class="com.xywei.dubbo.helloworld.service.impl.HelloworldServiceImpl"></bean>
+
+</beans>
